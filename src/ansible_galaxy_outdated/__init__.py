@@ -34,14 +34,14 @@ def _display_collection(collection, name_width, version_width, latest_width):
     )
 
 
-def _get_latest_version(collection):
-    url = f"https://galaxy.ansible.com/api/v2/collections/{collection.replace('.', '/')}/"
+def _get_latest_version(collection_name):
+    url = f"https://galaxy.ansible.com/api/v2/collections/{collection_name.replace('.', '/')}/"
 
     with urllib.request.urlopen(url) as f:
         galaxy_data = json.load(f)
 
     if galaxy_data["deprecated"]:
-        print(f"WARNING: collection {collection} is deprecated")
+        print(f"WARNING: collection {collection_name} is deprecated")
 
     return galaxy_data["latest_version"]["version"]
 
@@ -59,8 +59,13 @@ def main():
     collections = collections[list(collections.keys())[0]]
 
     data = []
-    for k, v in sorted(collections.items()):
-        data.append(dict(name=k, version=v["version"], latest=_get_latest_version(k)))
+    for collection_name, collection_data in sorted(collections.items()):
+        latest = _get_latest_version(collection_name)
+        if collection_data["version"] != latest:
+            data.append(dict(name=collection_name, version=collection_data["version"], latest=latest))
+
+    if not data:
+        return 0
 
     name_width, version_width, latest_width = _get_collection_widths(data)
 
@@ -76,6 +81,8 @@ def main():
     for collection in data:
         _display_collection(collection, name_width, version_width, latest_width)
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

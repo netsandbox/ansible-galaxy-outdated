@@ -6,5 +6,8 @@
 [![Python package](https://github.com/netsandbox/ansible-galaxy-outdated/actions/workflows/test.yaml/badge.svg)](https://github.com/netsandbox/ansible-galaxy-outdated/actions/workflows/test.yaml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-`ansible-galaxy-outdated` shows for all currently installed [Ansible](https://www.ansible.com/) collections
-the latest version from [Ansible Galaxy](https://galaxy.ansible.com/).
+`ansible-galaxy-outdated` shows currently installed [Ansible](https://www.ansible.com/) collections
+with updated version in [Ansible Galaxy](https://galaxy.ansible.com/).
+
+This is a workaround until `ansible-galaxy` themself have such a function.
+See GitHub issue <https://github.com/ansible/ansible/issues/75632>.

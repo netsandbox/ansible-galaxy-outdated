@@ -36,6 +36,7 @@ classifiers = [
 ansible-galaxy-outdated = "ansible_galaxy_outdated:main"
 
 [project.urls]
+Changelog = "https://github.com/netsandbox/ansible-galaxy-outdated/releases"
 Documentation = "https://github.com/netsandbox/ansible-galaxy-outdated"
 Homepage = "https://github.com/netsandbox/ansible-galaxy-outdated"
 Issues = "https://github.com/netsandbox/ansible-galaxy-outdated/issues"

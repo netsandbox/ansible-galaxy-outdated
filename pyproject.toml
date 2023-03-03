@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ansible-galaxy-outdated"
-description = "Shows latest version for currently install Ansible collections"
 dynamic = ["version"]
+description = "Shows currently installed Ansible collections with updated version in Ansible Galaxy"
 readme = "README.md"
 requires-python = ">= 3.8"
-license = {file = "COPYING"}
+license = {text = "GPLv3+"}
 authors = [
-  { name = "Christian Loos", email = "cloos@netsandbox.de" },
+  {name = "Christian Loos"},
+  {email = "cloos@netsandbox.de"},
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",

@@ -1,6 +1,6 @@
 """ansible-galaxy-outdated tests."""
 
-from ansiblegalaxyoutdated import _display_collection, _get_collection_widths
+from ansible_galaxy_outdated import _display_collection, _get_collection_widths
 
 TEST_COLLECTION = dict(name="Collection", version="Version", latest="Latest")
 

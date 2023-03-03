@@ -33,7 +33,7 @@ classifiers = [
 ]
 
 [project.scripts]
-ansible-galaxy-outdated = "ansiblegalaxyoutdated:main"
+ansible-galaxy-outdated = "ansible_galaxy_outdated:main"
 
 [project.urls]
 Documentation = "https://github.com/netsandbox/ansible-galaxy-outdated"

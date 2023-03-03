@@ -1,6 +1,6 @@
 .PHONY: help
-help: ## show help
-	@grep -h '##\ [[:alnum:]]' $(MAKEFILE_LIST) | sed -E 's/(.*):.*##(.*)/\1: \2/' | column -s: -t
+help: # Display help
+	@awk -F ':.*##' '/^[^\t].+?:.*?##/ {printf "\033[36m%-12s\033[0m %s\n", $$1, $$NF}' $(MAKEFILE_LIST)
 
 venv: ## create venv
 	python3 -m venv venv

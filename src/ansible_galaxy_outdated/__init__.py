@@ -1,6 +1,7 @@
 """ansible-galaxy-outdated."""
 
 import json
+import os
 import subprocess
 import sys
 import urllib.request
@@ -46,10 +47,32 @@ def _get_latest_version(collection_name):
     return galaxy_data["latest_version"]["version"]
 
 
+def _running_under_venv():
+    """Check if sys.base_prefix and sys.prefix match.
+
+    This handles PEP 405 compliant virtual environments.
+    """
+    return sys.prefix != getattr(sys, "base_prefix", sys.prefix)
+
+
+def _running_under_legacy_virtualenv():
+    """Check if sys.real_prefix is set.
+
+    This handles virtual environments created with pypa's virtualenv.
+    """
+    return hasattr(sys, "real_prefix")
+
+
 def main():
     """Run main function."""
+    if _running_under_venv() or _running_under_legacy_virtualenv():
+        prefix = os.path.normpath(sys.prefix)
+        ansible_galaxy_bin = os.path.join(prefix, "bin", "ansible-galaxy")
+    else:
+        ansible_galaxy_bin = "ansible-galaxy"
+
     try:
-        collections_json = subprocess.check_output(["ansible-galaxy", "collection", "list", "--format=json"])
+        collections_json = subprocess.check_output([ansible_galaxy_bin, "collection", "list", "--format=json"])
     except FileNotFoundError:
         sys.exit("ansible-galaxy not found")
     except subprocess.CalledProcessError as e:

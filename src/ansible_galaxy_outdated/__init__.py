@@ -36,7 +36,7 @@ def _display_collection(collection, name_width, version_width, latest_width):
 
 
 def _get_latest_version(collection_name):
-    url = f"https://galaxy.ansible.com/api/v2/collections/{collection_name.replace('.', '/')}/"
+    url = f"https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/index/{collection_name.replace('.', '/')}/"
 
     with urllib.request.urlopen(url) as f:
         galaxy_data = json.load(f)
@@ -44,7 +44,7 @@ def _get_latest_version(collection_name):
     if galaxy_data["deprecated"]:
         print(f"WARNING: collection {collection_name} is deprecated")
 
-    return galaxy_data["latest_version"]["version"]
+    return galaxy_data["highest_version"]["version"]
 
 
 def _running_under_venv():
